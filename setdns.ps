@@ -35,3 +35,11 @@ foreach ($EthAdapter in $EthAdapters)
     Set-DnsClientServerAddress -ServerAddresses 192.168.0.1, 192.168.0.2 -PassThru -InterfaceAlias $EthAdapter.name -Verbose
 }
 -------
+
+
+
+OR
+--------
+Get-NetAdapter -name ethernet*|Set-DnsClientServerAddress  -ServerAddresses ("8.8.8.8","8.8.8.9")
+-------
+
