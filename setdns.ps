@@ -1,0 +1,17 @@
+# Set the primary DNS server to the desired value
+
+$primaryDnsServer = "8.8.8.8"
+
+$interfaceIndex = (Get-NetAdapter).ifIndex
+
+# Get the current DNS server addresses
+
+$currentDnsServers = (Get-DnsClientServerAddress -InterfaceIndex $interfaceIndex).ServerAddresses
+
+# Store the current secondary DNS server in a variable
+
+$secondaryDnsServer = $currentDnsServers[1]
+
+# Set the primary and secondary DNS servers
+
+Set-DnsClientServerAddress -InterfaceIndex $interfaceIndex -ServerAddresses $primaryDnsServer,$secondaryDnsServer
