@@ -17,5 +17,21 @@ $secondaryDnsServer = $currentDnsServers[1]
 Set-DnsClientServerAddress -InterfaceIndex $interfaceIndex -ServerAddresses $primaryDnsServer,$secondaryDnsServer
 
 
-
+OR
+----------
 Get-DnsClient | Set-DnsClientServerAddress -ServerAddresses ("1.1.1.1","1.0.0.1")
+----------
+
+OR
+----------
+Set-DnsClientServerAddress -InterfaceAlias 'Ethernet' -ServerAddresses '192.168.0.4','192.168.0.5'
+-------------
+
+OR
+--------
+$EthAdapters = Get-NetAdapter -Name Ether*
+foreach ($EthAdapter in $EthAdapters)
+{
+    Set-DnsClientServerAddress -ServerAddresses 192.168.0.1, 192.168.0.2 -PassThru -InterfaceAlias $EthAdapter.name -Verbose
+}
+-------
